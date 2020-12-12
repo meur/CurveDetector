@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-        final Mat input = readImage("curve1.png");
+        final Mat input = readImage("curve4.png");
         showImage(input, "original");
 
         System.out.printf("col: %d row: %d\n", input.cols(), input.rows());
@@ -161,10 +161,10 @@ public class Main {
     private static void exportPoints(final Mat input, final String outputFileName) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(outputFileName));
-            for (int x = 0; x < input.rows(); x++) {
-                for (int y = 0; y < input.cols(); y++) {
-                    if (isBlackPoint(input, x, y)) {
-                        writer.write(y + " " + x + "\n");
+            for (int x = 0; x < input.cols(); x++) {
+                for (int y = 0; y < input.rows(); y++) {
+                    if (isBlackPoint(input, y, x)) {
+                        writer.write(x + " " + (input.rows() - y) + "\n");
                     }
                 }
             }
